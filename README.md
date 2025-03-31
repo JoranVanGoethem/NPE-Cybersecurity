@@ -66,8 +66,8 @@ This project is part of the NPECyberSecurity & Virtualisation course (2024-2025)
   - **Pieter-Jan Maenhaut** - pieterjan.maenhaut@hogent.be
 
 ## Important Deadlines
-- **Vulnerability Selection Submission**: Sunday, 23/03/2025 - 18:00
-- **Final Submission**: Sunday, 18/05/2025 - 18:00 (STRICT DEADLINE)
+- **Vulnerability Selection Submission**: `Sunday, 23/03/2025 - 18:00`
+- **Final Submission**:  `Sunday, 18/05/2025 - 18:00 (STRICT DEADLINE)`
 
 ## Notes
 - Late submissions are **not accepted**.
