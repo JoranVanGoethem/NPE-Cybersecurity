@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# Script voor Webserver
+# Script voor testing
 
 #------------------------------------------------------------------------------ 
 # Bash settings 
@@ -14,7 +14,7 @@ set -u           # Stop het script bij een onbestaande variabele
 # Variables 
 #------------------------------------------------------------------------------ 
 
-$version = "8.5p1"
+vdipath = "/path/to/kali-vdi.vdi"
 
 #------------------------------------------------------------------------------ 
 # Provision server 
@@ -25,23 +25,20 @@ log "Starting server specific provisioning tasks on ${HOSTNAME}"
 # Functions 
 #------------------------------------------------------------------------------ 
 
-function Install_32BitOpenSSH {
-    # Enable EPEL repository
-    sudo dnf install -y epel-release
-    sudo dnf update -y
+function Make_VM {
+    # Create the Kali Linux VM
+    VBoxManage createvm --name "Kali-VM" --register
 
-    # Check for available versions of OpenSSH (32-bit)
-    sudo dnf --showduplicates list openssh-server.i686
+    # Set memory and CPUs
+    VBoxManage modifyvm "Kali-VM" --memory 2048 --cpus 2 --vram 16
 
-    # Install a specific version of OpenSSH if available (e.g., 8.5p1)
-    sudo dnf install -y openssh-server-"$version".i686
+    # Set network to internal (intnet) for the attack VM
+    VBoxManage modifyvm "Kali-VM" --nic1 intnet --intnet1 "intnet"
 
-    # If the desired version is not available in the repository, we can try to install it manually.
-    # For manual installation, download the appropriate .rpm from a trusted source and install it.
-    # Example:
-    # wget https://example.com/openssh-server-<version>.i686.rpm
-    # sudo dnf install /path/to/openssh-server-<version>.i686.rpm
+    # Attach the Kali Linux VDI
+    VBoxManage storagectl "Kali-VM" --name "SATA Controller" --add sata --controller IntelAhci
+    VBoxManage storageattach "Kali-VM" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium "$vdipath"
+
 }
 
-# Call the function to install 32-bit OpenSSH
-Install_32BitOpenSSH
+Make_VM
