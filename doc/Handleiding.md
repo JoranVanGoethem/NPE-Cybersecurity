@@ -85,10 +85,10 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
 | Commando                                             | Omschrijving                                                |
 |------------------------------------------------------|-------------------------------------------------------------|
 | `ssh -p <poort> gebruiker@127.0.0.1`                 | Verbinding maken met de VM via poortforwarding              |
-| `scp bestand gebruiker@127.0.0.1:/pad`               | Bestand kopiëren naar de VM via SCP                          |
+| `scp bestand gebruiker@127.0.0.1:/pad`               | Bestand kopiëren naar de VM via SCP                         |
 | `VBoxManage startvm "VM-Naam"`                       | VM opstarten via CLI                                        |
 | `VBoxManage showvminfo "VM-Naam"`                    | Informatie tonen over een specifieke VM                     |
-| `VBoxManage list runningvms`                         | Lijst van draaiende VM’s tonen                               |
+| `VBoxManage list runningvms`                         | Lijst van draaiende VM’s tonen                              |
 | `VBoxManage controlvm "VM-Naam" poweroff`            | VM geforceerd afsluiten via CLI                             |
 
 ---
