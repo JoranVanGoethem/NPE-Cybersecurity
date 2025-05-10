@@ -11,7 +11,7 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
 1. **Download de benodigde VDI-bestanden**:
 
    * **Kali Linux**: [Kali.vdi](https://sourceforge.net/projects/osboxes/files/v/vb/25-Kl-l-x/2024.4/64bit.7z/download)
-   * **Debian Bullseye**: [Debian.vdi](https://sourceforge.net/projects/osboxes/files/v/vb/14-D-b/11/Workstation/64bit.7z/download)
+   * **Debian 11 Bullseye**: [Debian.vdi](https://sourceforge.net/projects/osboxes/files/v/vb/14-D-b/11/Workstation/64bit.7z/download)
 
 2. **Plaats de bestanden op een bekende locatie** op je systeem en noteer het pad.
 
