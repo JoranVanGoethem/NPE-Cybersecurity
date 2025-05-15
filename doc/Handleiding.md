@@ -11,18 +11,18 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
 1. **Download de benodigde VDI-bestanden**:
 
    * **Kali Linux**: [Kali.vdi](https://sourceforge.net/projects/osboxes/files/v/vb/25-Kl-l-x/2024.4/64bit.7z/download)
-   * **Debian 11 Bullseye**: [Debian.vdi](https://sourceforge.net/projects/osboxes/files/v/vb/14-D-b/11/Workstation/64bit.7z/download)
+   * **Debian 11 Bullseye**: [Debian.vdi](https://sourceforge.net/projects/osboxes/files/v/vb/14-D-b/11/Workstation/32bit.7z/download)
 
-   ![Sourceforge locatie](./img/)
+   ![Sourceforge locatie](./img-VMAanmaken/)
 
 2. **extract de zip files**
    * extract Kali in de locatie: `/vdi-files/Kali`
    * het pad noemt: `/vdi-files/64bit/64bit/Kali Linux 2024.4 (64bit).vdi`
 
    * extract Debian in de locatie: `/vdi-files/Debian`
-   * het pad noemt: `/vdi-files/64bit/64bit/Debian 11 (64bit).vdi`
+   * het pad noemt: `/vdi-files/32bit/32bit/Debian 11 (32bit).vdi`
 
-   ![VDI files locatie](./img/)
+   ![VDI files locatie](./img-VMAanmaken/)
 
 3. **Pas de `Build-VM.sh` aan INDIEN vorige stap niet gevolgd**:
 
@@ -37,12 +37,12 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
      KALI_VDI_PATH="/jouw/pad/naar/Kali.vdi"
      ```
 
-   ![Sourceforge locatie](./img/)
+   ![Sourceforge locatie](./img-VMAanmaken/)
 
 4. **Voeg VBoxManage toe aan de terminal**
    * voer het commando: `export PATH=$PATH:"/c/Program Files/Oracle/VirtualBox"` uit
 
-   ![bash VboxManage](./img/)
+   ![bash VboxManage](./img-VMAanmaken/)
 
 5. **Voer het script `Build-VM.sh` uit.**
 
@@ -50,14 +50,14 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
    * Voer dit commando uit om kali & Debian aan te maken: `./Build-VM.sh`
    * De virtuele machines worden aangemaakt in VirtualBox.
 
-   ![bash script runnen](./img/)
+   ![bash script runnen](./img-VMAanmaken/)
 
-   ![virtualbox VM's](./img/)
+   ![virtualbox VM's](./img-VMAanmaken/)
 
 6. **start de VM's**
    * open virtualbox en start beide VM's
 
-   ![Virtualbox draaiend](./img/)
+   ![Virtualbox draaiend](./img-VMAanmaken/)
 
 7. **Controleer of de VM's correct zijn opgestart** via de VirtualBox GUI of via:
 
@@ -65,13 +65,13 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
    VBoxManage list runningvms
    ```
 
-   ![running bash](./img/)
+   ![running bash](./img-VMAanmaken/)
 
 8. **Log in op de VM's**
    * Log in met het wachtwoord: `osboxes.org` op de kali VM
    * Log in met het wachtwoord: `osboxes.org` op de Debian VM
 
-   ![VM schermen](./img/)
+   ![VM schermen](./img-VMAanmaken/)
 
 ---
 
