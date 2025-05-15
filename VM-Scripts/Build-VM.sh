@@ -37,6 +37,9 @@ function create_Debian(){
 VBoxManage createvm --name "$DEBIAN_VM_NAME" --register
 
 VBoxManage modifyvm "$DEBIAN_VM_NAME" --memory 2048 --acpi on --boot1 dvd --nic1 nat
+VBoxManage modifyvm "$DEBIAN_VM_NAME" --cpus 2
+VBoxManage modifyvm "$DEBIAN_VM_NAME" --vram 128
+
 
 # Debian NAT port forwarding: host port 2222 -> guest port 22
 VBoxManage modifyvm "$DEBIAN_VM_NAME" --natpf1 "ssh,tcp,127.0.0.1,2222,,22"
@@ -53,7 +56,11 @@ VBoxManage storageattach "$DEBIAN_VM_NAME" --storagectl "SATA Controller" --port
 function create_Kali() {
 # === Kali VM ===
 VBoxManage createvm --name "$KALI_VM_NAME" --register
+
 VBoxManage modifyvm "$KALI_VM_NAME" --memory 2048 --acpi on --boot1 dvd --nic1 nat
+VBoxManage modifyvm "$KALI_VM_NAME" --cpus 2
+VBoxManage modifyvm "$KALI_VM_NAME" --vram 128
+
 
 
 # Kali NAT port forwarding: host port 2223 -> guest port 22

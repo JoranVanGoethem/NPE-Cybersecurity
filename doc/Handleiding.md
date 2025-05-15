@@ -32,15 +32,18 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
      ```
 
 4. **Voeg VBoxManage toe aan de terminal**
-   * 
+   * voer het commando: `export PATH=$PATH:"/c/Program Files/Oracle/VirtualBox"` uit
 
-4. **Voer het script `Build-VM.sh` uit.**
+5. **Voer het script `Build-VM.sh` uit.**
 
    * open een git bash terminal in de map `/src/VM-Scripts/`
    * Voer dit commando uit om kali & Debian aan te maken: `./Build-VM.sh`
    * De virtuele machines worden aangemaakt in VirtualBox.
 
-5. **Controleer of de VM's correct zijn opgestart** via de VirtualBox GUI of via:
+6. **start de VM's**
+   * open virtualbox en start beide VM's
+
+6. **Controleer of de VM's correct zijn opgestart** via de VirtualBox GUI of via:
 
    ```bash
    VBoxManage list runningvms
