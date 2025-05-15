@@ -17,7 +17,7 @@ KALI_VM_NAME="attacker-kali"
 
 # Pad naar VDI-bestanden (vervang deze door jouw correcte paden met forward slashes)
 DEBIAN_VDI_PATH="../vdi-files/Debian/32bit/32bit/Debian 11 (32bit).vdi"
-KALI_VDI_PATH="../vdi-files/Kali/64bit/64bit/Kali Linux 2024.4 (32bit).vdi"
+KALI_VDI_PATH="../vdi-files/Kali/64bit/64bit/Kali Linux 2024.4 (64bit).vdi"
 
 
 # Naam van het interne netwerk
