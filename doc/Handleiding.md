@@ -3,6 +3,10 @@
 Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittesten in een kritieke Debian-omgeving (versie 10 Bullseye), die wordt aangevallen vanaf een Kali Linux-machine. Beide virtuele machines (VM’s) worden opgestart via `VBoxManage`, en de benodigde scripts worden automatisch geïnstalleerd via PowerShell-scripts.
 
 ---
+## 0. Voor het stappenplan
+1. Clone de github-repo op: `https://github.com/JoranVanGoethem/NPE-Cybersecurity`
+2. Voer in deze repository het stappenplan uit, hierin vind u ook de nieuwste handleiding en extra informatie over de aanval. Daarnaast staan hier ook de meest recente scripts in voor het testen van deze aanval.
+
 
 ## 1. Stappenplan
 
