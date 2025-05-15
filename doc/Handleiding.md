@@ -13,9 +13,12 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
    * **Kali Linux**: [Kali.vdi](https://sourceforge.net/projects/osboxes/files/v/vb/25-Kl-l-x/2024.4/64bit.7z/download)
    * **Debian 11 Bullseye**: [Debian.vdi](https://sourceforge.net/projects/osboxes/files/v/vb/14-D-b/11/Workstation/64bit.7z/download)
 
-2. **Plaats de bestanden op een bekende locatie** op je systeem en noteer het pad.
+2. **extract de zip files**
+   * extract Kali in de locatie: `/vdi-files/Kali`
 
-3. **Pas de `Build-VM.sh` aan**:
+   * extract Debian in de locatie: `/vdi-files/Debian`
+
+3. **Pas de `Build-VM.sh` aan INDIEN vorige stap niet gevolgd**:
 
    * Vervang `DEBIAN_VDI_PATH=""` met:
 
@@ -28,8 +31,13 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
      KALI_VDI_PATH="/jouw/pad/naar/Kali.vdi"
      ```
 
+4. **Voeg VBoxManage toe aan de terminal**
+   * 
+
 4. **Voer het script `Build-VM.sh` uit.**
 
+   * open een git bash terminal in de map `/src/VM-Scripts/`
+   * Voer dit commando uit om kali & Debian aan te maken: `./Build-VM.sh`
    * De virtuele machines worden aangemaakt in VirtualBox.
 
 5. **Controleer of de VM's correct zijn opgestart** via de VirtualBox GUI of via:
