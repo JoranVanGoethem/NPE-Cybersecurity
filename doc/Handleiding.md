@@ -1,6 +1,8 @@
 # Handleiding: Threat `CVE-2024-6387` Uittesten
 
-Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittesten in een kritieke Debian-omgeving (versie 10 Bullseye), die wordt aangevallen vanaf een Kali Linux-machine. Beide virtuele machines (VM’s) worden opgestart via `VBoxManage`, en de benodigde scripts worden automatisch geïnstalleerd via PowerShell-scripts.
+Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittesten in een kritieke Debian-omgeving (32bit versie 11 Bullseye), die wordt aangevallen vanaf een Kali Linux-machine. Beide virtuele machines (VM’s) worden opgestart via `VBoxManage`, en de benodigde scripts worden automatisch geïnstalleerd via PowerShell-scripts.
+
+---
 
 ## 0. Voor het stappenplan
 
@@ -81,9 +83,13 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
 
    ![VM schermen](./img-VMAanmaken/)
 
+---
+
+<!-- ------------------------[AANVAL]------------------------------------------------------- -->
+
 ### 1.2 Installatie van OpenSSH 8.5p1 op Debian
 
-1. SSH-verbinding met Debian VM:
+1. **Maak een SSH-verbinding met de Debian VM:**
 
    ```bash
    ssh -p 2222 osboxes@127.0.0.1
@@ -93,12 +99,13 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
 
    ![stappen](./img-VMAanmaken/stap1.png)
 
-2. Maak het script aan:
+2. **Maak het install script aan:**
    ```bash
    nano install_openssh_8.5p1.sh
    ```
    ![stappen](./img-VMAanmaken/stap2.png)
-3. Maak het script uitvoerbaar en voer het uit:
+
+3. **Maak het script uitvoerbaar en voer het uit:**
    ```bash
    chmod +x install_openssh_8.5p1.sh
    sudo ./install_openssh_8.5p1.sh
@@ -107,9 +114,13 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
    ![stappen](./img-VMAanmaken/stap3.png)
    Sluit hier de SSH-verbinding met Debian zodat poort 22 niet bezet is tijdens de aanval.
 
+---
+
+
+
 ### 1.3 Aanval Uitvoeren vanuit Kali op de Debian VM
 
-1. Test de verbinding tussen Kali en Debian
+1. **Test de verbinding tussen Kali en Debian.**
 
    ```bash
    ping 192.168.56.101
@@ -117,7 +128,7 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
 
    ![stappen](./img-VMAanmaken/stap5.png)
 
-2. Start sshd in debugmodus (voor live logging tijdens aanval):
+2. **Start sshd in debugmodus (voor live logging tijdens aanval):**
 
    ```bash
    sudo /usr/sbin/sshd -ddd
@@ -135,7 +146,9 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
 
    Na het uitvoeren van deze commando's zou alles correct moeten verlopen.
 
-3. Voer de exploit uit op de doelmachine via netwerkinterface eth1, met 200 gelijktijdige verbindingen om de race condition te triggeren.
+3. **Voer de exploit uit** 
+
+   op de doelmachine via netwerkinterface eth1 worden met 200 gelijktijdige verbindingen geconecteerd om de race condition te triggeren.
 
    ```bash
    python3 CVE-2024-6387.py exploit -T 192.168.56.101 -p 22 -n eth1 -s 200
@@ -143,7 +156,8 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
 
    ![stappen](./img-VMAanmaken/stap6.png)
 
-4. Monitor ondertussen de debug-output in Debian:
+4. **Monitor ondertussen de debug-output in Debian:**
+
    Let op onderstaande signalen in de debug-output, die wijzen op succesvolle exploitatie.
 
    - `padding error`
@@ -168,7 +182,17 @@ Handige commando’s en referenties:
 | `ping 192.168.56.101`                                                     | Test de netwerkverbinding vanaf Kali naar Debian                          |
 | `python3 CVE-2024-6387.py exploit -T 192.168.56.101 -p 22 -n eth1 -s 200` | Voert de exploit uit vanaf Kali met 200 gelijktijdige verbindingen        |
 
-## 3. Samenvatting
+---
+## 3. Mogelijke gevaren en oplossingen
+
+### 3.1 Gevaren
+
+
+### 3.1 Problemen
+
+---
+
+## 4. Samenvatting
 
 - Start beide VM’s (Kali & Debian) in VirtualBox
 - Installeer OpenSSH 8.5p1 op Debian via script
