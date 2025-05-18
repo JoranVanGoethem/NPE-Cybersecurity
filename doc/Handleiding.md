@@ -2,8 +2,6 @@
 
 Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittesten in een kritieke Debian-omgeving (versie 10 Bullseye), die wordt aangevallen vanaf een Kali Linux-machine. Beide virtuele machines (VM’s) worden opgestart via `VBoxManage`, en de benodigde scripts worden automatisch geïnstalleerd via PowerShell-scripts.
 
----
-
 ## 0. Voor het stappenplan
 
 1. Clone de github-repo op: `https://github.com/JoranVanGoethem/NPE-Cybersecurity`
@@ -83,8 +81,6 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
 
    ![VM schermen](./img-VMAanmaken/)
 
----
-
 ### 1.2 Installatie van OpenSSH 8.5p1 op Debian
 
 1. SSH-verbinding met Debian VM:
@@ -110,8 +106,6 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
    Na het uitvoeren moet je onderstaande afbeelding verkrijgen. Ook kun je controleren of de juiste versie van OpenSSH is geïnstalleerd.
    ![stappen](./img-VMAanmaken/stap3.png)
    Sluit hier de SSH-verbinding met Debian zodat poort 22 niet bezet is tijdens de aanval.
-
----
 
 ### 1.3 Aanval Uitvoeren vanuit Kali op de Debian VM
 
@@ -159,8 +153,6 @@ Deze handleiding beschrijft hoe je de kwetsbaarheid `CVE-2024-6387` kunt uittest
 
    ![stappen](./img-VMAanmaken/stap8.png)
 
----
-
 ## 2. Cheatsheet
 
 Handige commando’s en referenties:
@@ -176,45 +168,31 @@ Handige commando’s en referenties:
 | `ping 192.168.56.101`                                                     | Test de netwerkverbinding vanaf Kali naar Debian                          |
 | `python3 CVE-2024-6387.py exploit -T 192.168.56.101 -p 22 -n eth1 -s 200` | Voert de exploit uit vanaf Kali met 200 gelijktijdige verbindingen        |
 
----
-
 ## 3. Samenvatting
 
-### Aanval Uitvoeren op de Debian VM
-
-1. **Plaats het exploit-script `CVE-2024-6387.py`** op de Kali VM (via shared folder of `scp`).
-2. **Voer het script uit op de Kali VM**:
-   ```bash
-   python3 CVE-2024-6387.py <doel-ip>
-   ```
-3. Monitor het gedrag van de Debian VM om te controleren of deze crasht of een shell terugstuurt.
-
-### Verifiëren van de Aanval
-
-1. Open een terminal op je hostmachine.
-
-2. Controleer in VirtualBox welke poort wordt doorgestuurd naar de SSH-poort van de Debian VM.
-
-3. Maak verbinding via SSH met de Debian VM:
-
-```bash
-ssh -p <poortnummer> gebruiker@127.0.0.1
-```
-
-4. Controleer of de verbinding faalt of is overgenomen:
-
-   - Indien de verbinding is gekraakt of overgenomen, is de aanval geslaagd en is de SSH-verbinding niet meer veilig.
-
----
+- Start beide VM’s (Kali & Debian) in VirtualBox
+- Installeer OpenSSH 8.5p1 op Debian via script
+- Sluit SSH-verbinding met Debian zodat poort 22 vrij is voor de aanval
+- Start `sshd` in debugmodus op Debian
+  ```bash
+  sudo /usr/sbin/sshd -ddd
+  ```
+- Voer exploit uit vanaf Kali
+  ```bash
+  python3 CVE-2024-6387.py exploit -T 192.168.56.101 -p 22 -n eth1 -s 200
+  ```
+- Observeer in Debian de volgende signalen (debug-output):
+  - `padding error`
+  - `message authentication code incorrect`
+  - `ssh_dispatch_run_fatal`
+  - `killing privsep child`
 
 ## 4. Opmerkingen
 
-- Zorg ervoor dat je **netwerkadapter** in VirtualBox correct is ingesteld (bijv. **NAT met poort-forwarding**).
-- Gebruik **een afgesloten testomgeving**, los van productie- of persoonlijke systemen.
-- **Update en patch kwetsbare systemen** na het testen.
-- Deze handleiding is bedoeld **voor educatieve doeleinden** en mag **niet** worden gebruikt voor ongeautoriseerde aanvallen.
-
----
+- De gebruikte PoC werkt enkel op **32-bit Linux-systemen** met **glibc** en de kwetsbare versie van OpenSSH (8.5p1). De meeste moderne 64-bit systemen zijn hiermee niet kwetsbaar.
+- Voor een succesvolle demonstratie is het cruciaal dat `sshd` **manueel wordt gestart** (bijv. met `sshd -ddd`) zodat je live kunt observeren wat er gebeurt.
+- Tijdens de aanval mogen er **geen actieve SSH-sessies** zijn, anders kan het exploit-effect (zoals race condition of crash) uitblijven.
+- De CVE richt zich voornamelijk op **pre-auth heap corruptie**, met aangepaste payloads zou dit potentieel tot **Remote Code Execution** kunnen leiden.
 
 ## 5. Makers van het Project
 
