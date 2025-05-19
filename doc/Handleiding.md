@@ -186,9 +186,6 @@ Handige commando’s en referenties:
 | `python3 CVE-2024-6387.py exploit -T 192.168.56.101 -p 22 -n eth1 -s 200` | Voert de exploit uit vanaf Kali met 200 gelijktijdige verbindingen        |
 
 ---
-Zeker, hier is een nog duidelijker en verder opgesplitste versie:
-
----
 
 ## 3. Mogelijke gevaren en oplossingen
 
